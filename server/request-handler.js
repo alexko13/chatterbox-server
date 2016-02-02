@@ -64,7 +64,7 @@ var requestHandler = function(request, response) {
   } else if(request.method === 'POST' && URI.test(request.url)) {
     response.writeHead(201, headers);
     request.on('data', function(data) {
-      storage.results.push(JSON.parse(data));
+      storage.results.unshift(JSON.parse(data));
     });
     response.end(JSON.stringify(storage));
   } else {

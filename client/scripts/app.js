@@ -66,7 +66,6 @@ $(function() {
       $.ajax({
         url: app.server,
         type: "GET",
-        data: {order: "-createdAt"},
         contentType: "application/json",
         success: function(data) {
           console.log("chatterbox: Fetched! data: ", data);
