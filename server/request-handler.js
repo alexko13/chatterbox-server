@@ -57,17 +57,17 @@ var requestHandler = function(request, response) {
 
   if(request.method === 'GET' && URI.test(request.url)) {
     response.writeHead(200, headers);
-    response.write(JSON.stringify(storage));
+    response.end(JSON.stringify(storage));
   } else if(request.method === 'POST' && URI.test(request.url)) {
     response.writeHead(201, headers);
     request.on('data', function(data) {
       storage.results.push(JSON.parse(data));
     });
+    response.end();
   } else {
     response.writeHead(404, headers);
+    response.end();
   }
-
-  response.end();
 };
 
 // These headers will allow Cross-Origin Resource Sharing (CORS).
@@ -90,4 +90,4 @@ var storage = {
   results: []
 };
 
-module.exports = requestHandler;
+module.exports.requestHandler = requestHandler;
