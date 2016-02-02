@@ -87,7 +87,7 @@ $(function() {
         }
       }
 
-      app.$roomSelect.html('');
+      app.$roomSelect.html('<option>lobby</option>');
       for(var room in app.chatRooms) {
         app.addRoom(room);
       }
