@@ -133,7 +133,8 @@ $(function() {
       var messageObj = {
         text: app.$message.val(),
         username: app.username,
-        roomname: app.$roomSelect.val()
+        roomname: app.$roomSelect.val(),
+        createdAt: Date()
       };
       app.currentRoom = app.$roomSelect.val();
       app.send(messageObj);
