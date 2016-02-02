@@ -1,7 +1,7 @@
 // YOUR CODE HERE:
 $(function() {
   app = {
-    server: 'http://127.0.0.1:3000/',
+    server: 'http://127.0.0.1:3000/classes/',
     username: 'Anonymous',
     currentRoom: 'lobby',
     init: function() {
