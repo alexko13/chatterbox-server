@@ -44,7 +44,7 @@ $(function() {
       app.fetch();
       setInterval(function() {
         app.fetch();
-      }, 5000);
+      }, 3000);
     },
     send: function(message) {
       $.ajax({
@@ -86,7 +86,8 @@ $(function() {
         }
       }
 
-      app.$roomSelect.html('<option>lobby</option>');
+      app.$roomSelect.html('');
+      app.chatRooms.lobby = true;
       for(var room in app.chatRooms) {
         app.addRoom(room);
       }
