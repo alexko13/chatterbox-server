@@ -53,11 +53,12 @@ var requestHandler = function(request, response) {
   // Calling .end "flushes" the response's internal buffer, forcing
   // node to actually send all the data over to the client.
 
-  
-  if(request.method === 'GET' && request.url === '/classes/messages') {
+  var URI = /\/classes\/\w+/;
+
+  if(request.method === 'GET' && URI.test(request.url)) {
     response.writeHead(200, headers);
     response.write(JSON.stringify(storage));
-  } else if(request.method === 'POST' && request.url === '/classes/messages') {
+  } else if(request.method === 'POST' && URI.test(request.url)) {
     response.writeHead(201, headers);
     request.on('data', function(data) {
       storage.results.push(JSON.parse(data));
