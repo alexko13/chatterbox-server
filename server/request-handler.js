@@ -54,14 +54,16 @@ var requestHandler = function(request, response) {
   // node to actually send all the data over to the client.
 
   
-  if(request.method === 'GET') {
+  if(request.method === 'GET' && request.url === '/classes/messages') {
     response.writeHead(200, headers);
     response.write(JSON.stringify(storage));
-  } else if(request.method === 'POST') {
+  } else if(request.method === 'POST' && request.url === '/classes/messages') {
     response.writeHead(201, headers);
     request.on('data', function(data) {
       storage.results.push(JSON.parse(data));
     });
+  } else {
+    response.writeHead(404, headers);
   }
 
   response.end();
