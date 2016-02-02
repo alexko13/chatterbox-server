@@ -30,7 +30,7 @@ var requestHandler = function(request, response) {
   console.log("Serving request type " + request.method + " for url " + request.url);
 
   // The outgoing status.
-  var statusCode = 200;
+  //var statusCode = 200;
 
   // See the note below about CORS headers.
   var headers = defaultCorsHeaders;
@@ -43,7 +43,7 @@ var requestHandler = function(request, response) {
 
   // .writeHead() writes to the request line and headers of the response,
   // which includes the status and all headers.
-  response.writeHead(statusCode, headers);
+  //response.writeHead(statusCode, headers);
 
   // Make sure to always call response.end() - Node may not send
   // anything back to the client until you do. The string you pass to
@@ -53,16 +53,17 @@ var requestHandler = function(request, response) {
   // Calling .end "flushes" the response's internal buffer, forcing
   // node to actually send all the data over to the client.
 
-  var data = {};
-  data.results = [];
   
-  if(request.method === 'GET' /*&& request.url === '/classes/messages'*/) {
-    response.write(JSON.stringify(data));
-  } else if(request.method === 'POST' /*&& request.url === '/classes/messages'*/) {
+  if(request.method === 'GET') {
+    response.writeHead(200, headers);
+    response.write(JSON.stringify(storage));
+  } else if(request.method === 'POST') {
     response.writeHead(201, headers);
-    response.write(JSON.stringify(data));
+    request.on('data', function(data) {
+      storage.results.push(JSON.parse(data));
+    });
   }
-  
+
   response.end();
 };
 
@@ -80,6 +81,10 @@ var defaultCorsHeaders = {
   "access-control-allow-methods": "GET, POST, PUT, DELETE, OPTIONS",
   "access-control-allow-headers": "content-type, accept",
   "access-control-max-age": 10 // Seconds.
+};
+
+var storage = {
+  results: []
 };
 
 module.exports = requestHandler;
