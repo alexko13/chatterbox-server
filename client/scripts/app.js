@@ -67,7 +67,7 @@ $(function() {
         url: app.server,
         type: "GET",
         data: {order: "-createdAt"},
-        dataType: "json",
+        contentType: "application/json",
         success: function(data) {
           console.log("chatterbox: Fetched! data: ", data);
           app.populateRoomsAndChats(data);

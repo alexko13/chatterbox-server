@@ -66,7 +66,7 @@ var requestHandler = function(request, response) {
     request.on('data', function(data) {
       storage.results.push(JSON.parse(data));
     });
-    response.end();
+    response.end(JSON.stringify(storage));
   } else {
     response.writeHead(404, headers);
     response.end();
