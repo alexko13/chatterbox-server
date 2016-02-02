@@ -64,6 +64,8 @@ var requestHandler = function(request, response) {
       storage.results.push(JSON.parse(data));
     });
     response.end();
+  } else if(request.method === 'OPTIONS') {
+
   } else {
     response.writeHead(404, headers);
     response.end();

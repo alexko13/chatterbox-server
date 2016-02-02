@@ -1,7 +1,7 @@
 // YOUR CODE HERE:
 $(function() {
   app = {
-    server: 'https://api.parse.com/1/classes/chatterbox',
+    server: 'http://127.0.0.1:3000/',
     username: 'Anonymous',
     currentRoom: 'lobby',
     init: function() {
