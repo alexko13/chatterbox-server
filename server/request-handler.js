@@ -30,7 +30,7 @@ var requestHandler = function(request, response) {
   console.log("Serving request type " + request.method + " for url " + request.url);
 
   // The outgoing status.
-  //var statusCode = 200;
+  // var statusCode = 200;
 
   // See the note below about CORS headers.
   var headers = defaultCorsHeaders;
@@ -43,7 +43,7 @@ var requestHandler = function(request, response) {
 
   // .writeHead() writes to the request line and headers of the response,
   // which includes the status and all headers.
-  //response.writeHead(statusCode, headers);
+  // response.writeHead(statusCode, headers);
 
   // Make sure to always call response.end() - Node may not send
   // anything back to the client until you do. The string you pass to
@@ -53,9 +53,12 @@ var requestHandler = function(request, response) {
   // Calling .end "flushes" the response's internal buffer, forcing
   // node to actually send all the data over to the client.
 
-  var URI = /\/classes\/\w+/;
+  var URI = /\/classes./;
 
-  if(request.method === 'GET' && URI.test(request.url)) {
+  if(request.method === 'OPTIONS' && URI.test(request.url)) {
+    response.writeHead(200, headers);
+    response.end();
+  } else if(request.method === 'GET' && URI.test(request.url)) {
     response.writeHead(200, headers);
     response.end(JSON.stringify(storage));
   } else if(request.method === 'POST' && URI.test(request.url)) {
@@ -64,8 +67,6 @@ var requestHandler = function(request, response) {
       storage.results.push(JSON.parse(data));
     });
     response.end();
-  } else if(request.method === 'OPTIONS') {
-
   } else {
     response.writeHead(404, headers);
     response.end();
