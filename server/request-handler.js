@@ -9,24 +9,20 @@ var defaultCorsHeaders = {
 
 exports.requestHandler = function(request, response) {
 
-  var URI = /\/classes./;
-
-  if(request.method === 'OPTIONS' && URI.test(request.url)) {
+  if(request.method === 'OPTIONS') {
     response.writeHead(200, defaultCorsHeaders);
     response.end();
-  } else if(request.method === 'GET' && URI.test(request.url)) {
+  } else if(request.method === 'GET') {
     response.writeHead(200, defaultCorsHeaders);
     response.end(JSON.stringify(storage));
-  } else if(request.method === 'POST' && URI.test(request.url)) {
-    response.writeHead(201, defaultCorsHeaders);
+  } else if(request.method === 'POST') {
     request.on('data', function(data) {
       storage.results.unshift(JSON.parse(data));
     });
+    response.writeHead(201, defaultCorsHeaders);
     response.end(JSON.stringify(storage));
-  } else {
-    response.writeHead(404, defaultCorsHeaders);
-    response.end();
   }
+  
 };
 
 var storage = {
