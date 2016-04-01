@@ -1,7 +1,7 @@
 Chatterbox
 ==============
 
-This is a project I completed as a student at Hack Reactor. This project was worked on with a pair.
+This is a solo project I completed as a student at Hack Reactor.
 
 Chatterbox is simple chat app that runs on Node.js.
 
